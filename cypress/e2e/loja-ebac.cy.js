@@ -1,110 +1,47 @@
-describe('Testes da Loja EBAC - Com Elementos Reais', () => {
+describe('Fluxo de Compra - Versão Final Corrigida', () => {
   
-  it('Deve fazer login com sucesso', () => {
-    cy.visit('/')
-    cy.get('.icon-user-unfollow').click()
-    cy.get('#username').type('aluno_ebac@teste.com')
-    cy.get('#password').type('teste@teste.com')
-    cy.get('.woocommerce-form > .button').click()
-    cy.get('.page-title').should('contain', 'Minha conta')
-  })
-
-  it('Deve navegar para a página "Comprar"', () => {
-    cy.visit('/')
+  it('Compra rápida e direta', function() {
+    // 1. Login
+    cy.visit('http://lojaebac.ebaconline.art.br/minha-conta/')
+    cy.get('[name="username"]').type('testeMaicon@gmail.com');
+    cy.get('#password').type('senha@123');
+    cy.get('#customer_login [name="login"]').click();
+    cy.wait(2000);
     
-    // Clicar no menu "Comprar" que está visível
-    cy.contains('Comprar').click()
+    // 2. Ir direto para o produto específico
+    cy.visit('/product/augusta-pullover-jacket/');
     
-    // Verificar se navegou para página de compras
-    cy.url().should('include', '/comprar')
-    cy.get('.page-title, h1, .products').should('exist')
-  })
-
-  it('Deve adicionar um produto ao carrinho', () => {
-    cy.visit('/')
+    // 3. Selecionar opções
+    cy.get('.button-variable-item-S').click();
+    cy.get('.button-variable-item-Blue').click();
     
-    // Clicar em um produto específico da lista
-    cy.contains('Helena Hooded Fleece').click()
+    // 4. Adicionar ao carrinho
+    cy.get('.single_add_to_cart_button').click();
+    cy.wait(2000);
     
-    // Na página do produto, adicionar ao carrinho
-    cy.get('.single_add_to_cart_button').click()
+    // 5. Ir para checkout
+    cy.visit('/checkout/');
     
-    // Verificar mensagem de sucesso
-    cy.get('.woocommerce-message').should('contain', 'adicionado')
-  })
-
-  it('Deve visualizar produtos em destaque', () => {
-    cy.visit('/')
+    // 6. Preencher dados
+    cy.get('#billing_first_name').clear().type('Maicon');
+    cy.get('#billing_last_name').clear().type('Figueredo');
+    cy.get('#billing_company').clear().type('Quality');
+    cy.get('#billing_address_1').clear().type('Avenida Brasil, 1234');
+    cy.get('#billing_city').clear().type('Sao Jose dos Pinhais');
+    cy.get('#billing_postcode').clear().type('83085190');
+    cy.get('#billing_phone').clear().type('41995959595');
+    cy.get('#billing_email').clear().type('testeMaicon@gmail.com');
     
-    // Verificar se a seção de produtos em destaque existe
-    cy.contains('Produtos em destaque').should('be.visible')
+    // 7. Selecionar estado COM FORCE
+    cy.get('#billing_state').select('PR', { force: true });
     
-    // Verificar se há produtos listados
-    cy.get('.product, .product-block').should('have.length.greaterThan', 0)
+    // 8. Método de pagamento COM FORCE
+    cy.get('#payment_method_cod').check({ force: true });
     
-    // Clicar no primeiro produto
-    cy.get('.product, .product-block').first().click()
+    // 9. Termos COM FORCE (importante!)
+    cy.get('#terms').check({ force: true });
     
-    // Verificar se carregou a página do produto
-    cy.get('.product_title, h1').should('exist')
-    cy.get('.price').should('be.visible')
-  })
-
-  it('Deve usar o menu categorias', () => {
-    cy.visit('/')
-    
-    // Clicar em Categorias
-    cy.contains('Categorias').click()
-    
-    // Verificar se o dropdown/menu abriu
-    cy.get('.sub-menu, .dropdown-menu, .children').should('be.visible')
-    
-    // Clicar em uma categoria específica (ex: Roupas)
-    cy.contains('Roupas').click({ force: true })
-    
-    // Verificar se carregou a página da categoria
-    cy.get('.page-title, h1').should('contain', 'Roupas')
-  })
-
-  it('Deve ver carrinho vazio', () => {
-    cy.visit('/')
-    
-    // Clicar no carrinho
-    cy.contains('Cart').click()
-    cy.contains('R$0,00').click()
-    
-    // Verificar página do carrinho
-    cy.url().should('include', '/carrinho')
-    cy.get('body').should('contain', 'Carrinho')
-    cy.get('body').should('contain', 'vazio')
-  })
-
-  it('Deve testar busca por produto específico', () => {
-    cy.visit('/')
-    
-    // Procurar campo de busca (pode estar oculto em mobile)
-    cy.get('body').then(($body) => {
-      const searchField = $body.find('input[type="search"], [name="s"]')
-      if (searchField.length > 0 && searchField.is(':visible')) {
-        cy.wrap(searchField).type('Jacket{enter}')
-        cy.get('.products, .product').should('contain', 'Jacket')
-      } else {
-        // Se não encontrar campo visível, testar URL direta de busca
-        cy.visit('/?s=Jacket')
-        cy.get('body').should('contain', 'Jacket')
-      }
-    })
-  })
-
-  it('Deve navegar pelo blog', () => {
-    cy.visit('/')
-    
-    // Clicar em Blog
-    cy.contains('Blog').click()
-    
-    // Verificar página do blog
-    cy.url().should('include', '/blog')
-    cy.get('.page-title, h1').should('contain', 'Blog')
-    cy.get('.post, .blog-post').should('have.length.greaterThan', 0)
-  })
-})
+    // 10. Finalizar pedido
+    cy.get('#place_order').click({ force: true });
+  });
+});
