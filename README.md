@@ -67,20 +67,28 @@ git clone https://github.com/Maiconcdz/desafio-cypress-QA.git
 
 # Entre na pasta do projeto
 cd desafio-cypress-QA
+
 Passo 2: Instalar Dependências
 cmd
+
 # Instalar o Cypress e dependências
 npm install
+
 ⏱️ Isso pode levar alguns minutos na primeira vez
 
 Passo 3: Verificar Instalação
+
 cmd
 # Verificar se o Cypress foi instalado
+
 npx cypress --version
+
 🎯 Executando os Testes
 Opção 1: Modo Interativo (Recomendado para visualizar)
 cmd
+
 npx cypress open
+
 No Cypress Runner:
 
 Clique em "E2E Testing"
@@ -92,15 +100,23 @@ Clique em "Start E2E Testing in Chrome"
 Clique no teste "Fluxo Completo de Compra"
 
 Opção 2: Modo Headless (Terminal)
+
 cmd
+
 npx cypress run --spec "cypress/e2e/loja-ebac.cy.js"
+
 ⚠️ Solução de Problemas Comuns
+
 Erro no PowerShell:
 
 cmd
+
 # Use o Command Prompt (CMD) em vez do PowerShell
+
 # Ou execute no PowerShell:
+
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+
 Erro de permissão:
 
 Execute o Command Prompt como Administrador
