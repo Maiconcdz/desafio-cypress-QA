@@ -1,17 +1,40 @@
 {
   "name": "desafio-cypress-qa",
   "version": "1.0.0",
-  "description": "",
+  "description": "Automação de testes E2E para loja EBAC com Cypress e BDD",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx cypress run",
+    "test:bdd": "npx cypress run --env TAGS=@ecommerce",
+    "test:open": "npx cypress open",
+    "test:bdd:open": "npx cypress open --env TAGS=@ecommerce",
+    "test:compra": "npx cypress run --env TAGS=@compra-completa",
+    "test:busca": "npx cypress run --env TAGS=@busca-produto"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "cypress",
+    "automation",
+    "e2e",
+    "bdd",
+    "cucumber",
+    "qa",
+    "testing"
+  ],
+  "author": "Maicon",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "@faker-js/faker": "^10.1.0",
-    "cypress": "^15.6.0"
+  "@badeball/cypress-cucumber-preprocessor": "^23.2.1",
+  "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+  "@faker-js/faker": "^10.1.0",
+  "cypress": "^15.6.0",
+  "esbuild": "^0.20.0"
+},
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": [
+      "cypress/e2e/step_definitions/**/*.js"
+    ],
+    "nonGlobalStepDefinitions": false
   }
+  
 }
