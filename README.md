@@ -39,6 +39,7 @@ Verifique a instalação:
 cmd
 node --version
 npm --version
+
 📥 Passo 2: Instalar Visual Studio Code (Opcional)
 Acesse: https://code.visualstudio.com/download
 
