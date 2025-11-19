@@ -24,7 +24,19 @@ Verifique a instalação:
 cmd
 node --version
 npm --version
+<<<<<<< HEAD
 📥 Passo 2: Instalar Git (Opcional)
+=======
+
+📥 Passo 2: Instalar Visual Studio Code (Opcional)
+Acesse: https://code.visualstudio.com/download
+
+Baixe a versão Windows
+
+Instale com configurações padrão
+
+📥 Passo 3: Instalar Git
+>>>>>>> 1d24808c7a1c3346b91c4dca64bfe265ccb715f7
 Acesse: https://git-scm.com/downloads
 
 Baixe para Windows
@@ -41,6 +53,7 @@ git clone https://github.com/Maiconcdz/desafio-cypress-QA.git
 
 # Entre na pasta do projeto
 cd desafio-cypress-QA
+<<<<<<< HEAD
 Passo 2: Instalar Dependências do Cypress e BDD
 cmd
 # Instalar Cypress e dependências BDD
@@ -48,16 +61,78 @@ npm install
 
 # Instalar dependências específicas do Cucumber BDD
 npm install @badeball/cypress-cucumber-preprocessor @bahmutov/cypress-esbuild-preprocessor esbuild --save-dev
+=======
+
+Passo 2: Instalar Dependências
+cmd
+
+# Instalar o Cypress e dependências
+npm install
+
+>>>>>>> 1d24808c7a1c3346b91c4dca64bfe265ccb715f7
 ⏱️ Isso pode levar alguns minutos na primeira vez
 
 Passo 3: Verificar Instalação
+
 cmd
+<<<<<<< HEAD
 # Verificar Cypress
 npx cypress --version
 
 # Verificar Cucumber
 npm list @badeball/cypress-cucumber-preprocessor
 🎯 Estrutura do Projeto BDD
+=======
+# Verificar se o Cypress foi instalado
+
+npx cypress --version
+
+🎯 Executando os Testes
+Opção 1: Modo Interativo (Recomendado para visualizar)
+cmd
+
+npx cypress open
+
+No Cypress Runner:
+
+Clique em "E2E Testing"
+
+Escolha "Chrome" como navegador
+
+Clique em "Start E2E Testing in Chrome"
+
+Clique no teste "Fluxo Completo de Compra"
+
+Opção 2: Modo Headless (Terminal)
+
+cmd
+
+npx cypress run --spec "cypress/e2e/loja-ebac.cy.js"
+
+⚠️ Solução de Problemas Comuns
+
+Erro no PowerShell:
+
+cmd
+
+# Use o Command Prompt (CMD) em vez do PowerShell
+
+# Ou execute no PowerShell:
+
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+
+Erro de permissão:
+
+Execute o Command Prompt como Administrador
+
+Erro de instalação lenta:
+
+cmd
+# Limpar cache e tentar novamente
+npm cache clean --force
+npm install
+📁 Estrutura do Projeto
+>>>>>>> 1d24808c7a1c3346b91c4dca64bfe265ccb715f7
 text
 desafio-cypress-QA/
 ├── cypress/
@@ -268,6 +343,7 @@ Quality Assurance Engineer
 📧 testeMaicon@gmail.com
 🔗 https://github.com/Maiconcdz
 
+<<<<<<< HEAD
 ✅ Status do Projeto
 Cypress configurado e funcionando
 
@@ -278,3 +354,7 @@ Cenários de teste automatizados
 Documentação completa
 
 Repositório no GitHub
+=======
+📄 Licença
+Este projeto é para fins educacionais e demonstração de habilidades em automação de testes.
+>>>>>>> 1d24808c7a1c3346b91c4dca64bfe265ccb715f7
